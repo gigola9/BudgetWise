@@ -1,0 +1,22 @@
+.actions {
+  height: 50px;
+  display: flex;
+
+  &__left {
+    width: 65px;
+  }
+
+  &__right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+
+    &--btn-search {
+      margin-right: 5px;
+    }
+  }
+
+  button {
+    padding-left: 10px;
+  }
+}

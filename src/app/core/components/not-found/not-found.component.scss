@@ -1,0 +1,36 @@
+.container {
+  height: calc(100vh - 60px);
+  background: #ececec;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin-top: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #2552bb;
+  color: #fff;
+  padding: 9px 15px;
+  border: 0;
+  border-radius: 5px;
+  margin-left: auto;
+}
+
+.msg {
+  text-transform: lowercase;
+  font-family: mtavrulibold;
+
+  font-size: 75px;
+  letter-spacing: -2px;
+  color: #507be3;
+}

@@ -1,0 +1,129 @@
+<div class="p-grid   p-align-center p-justify-center card" style="height: 150px; overflow: hidden;">
+  <div>
+    <div class="p-col-12" style="width: 140px;">Name</div>
+    <div class="p-col-12 bold">{{ item.name }}</div>
+  </div>
+  <div>
+    <div class="p-col-12" style="width: 140px;">Type</div>
+    <div class="p-col-12 bold">{{ item.type }}</div>
+  </div>
+ <div>
+  <div class="p-col-12" style="width: 140px;">Budget</div>
+  <div class="p-col-12 bold">{{ item.budget }}</div>
+ </div>
+ <div>
+  <div class="p-col-12" style="width: 140px;">Total Expenses</div>
+  <div class="p-col-12 bold">{{ item.totalExpenses }}</div>
+ </div>
+ <div>
+  <div class="p-col-12" style="width: 140px;">Start Date</div>
+  <div class="p-col-12 bold">{{ item.startDate | date }}</div>
+ </div>
+<div>
+
+</div>
+ <div>
+  <div class="p-col-12" style="width: 140px;">End Date</div>
+  <div class="p-col-12 bold">{{ item.endDate | date}}</div>
+ </div>
+
+ <div>
+  <div class="p-col-12" style="width: 140px;">Profit/Loss</div>
+  <div class="p-col-12 bold green">{{ item.profitLoss }}</div>
+ </div>
+ <div>
+  <div class="p-col-12" style="width: 140px;">Tasks Completed</div>
+  <div class="p-col-12 bold green">{{ item.tasksCompleted }}</div>
+ </div>
+</div>
+
+
+<div class="actions__right">
+  <button
+    pButton
+    id="weight-actions-add"
+    pTooltip="Add Project"
+    class="actions__right--btn-search"
+    icon="pi pi-plus"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    pButton
+    id="weight-actions-delete"
+    pTooltip="Delete"
+    class="actions__right--btn-search p-button-danger"
+    icon="pi pi-trash"
+    tooltipPosition="bottom"
+    [disabled]="true"
+  ></button>
+  <button
+    pButton
+    id="weight-actions-delete"
+    pTooltip="Export Invoice"
+    class="actions__right--btn-search p-button-success"
+    style="width: 150px;"
+    icon="pi pi-file-pdf"
+    tooltipPosition="bottom"
+    (click)="exportPdf()"
+    [disabled]="selectedRate?.length == 0"
+  >Export Invoice</button>
+</div>
+
+<div class="p-grid  p-align-center p-justify-center card" style="height: 84vh; overflow: hidden; margin-top: 30px;">
+  <div class="p-col" style="width: 100%; overflow-y: auto; height: calc(100% - 70px); margin-top: 20px;">
+    <p-table
+    #dt
+    [value]="projects"
+    [resizableColumns]="true"
+    dataKey="id"
+    editMode="row"
+    [totalRecords]="projectsLength"
+    [(selection)]="selectedRate"
+    >
+      <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+              <th style="min-width: 140px;">Project Task/Inventory</th>
+              <th style="min-width: 140px;">Person Responsible</th>
+              <th style="min-width: 110px;">Start Date</th>
+              <th style="min-width: 110px;">End Date</th>
+              <th style="min-width: 130px;">Status</th>
+              <th style="min-width: 130px;">Cost</th>
+              <th style="min-width: 130px;">Budgeted Cost</th>
+              <th style="min-width: 140px;">Actual Cost</th>
+              <th style="min-width: 140px;">Unit Quantity</th>
+              <th style="min-width: 140px;">Unit Cost</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+          <tr [pEditableRow]="rowData" [pSelectableRow]="rowData">
+              <td>
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+            </td>
+              <td>{{rowData.projectTask}}</td>
+              <td>{{rowData.personResponse}}</td>
+              <td>{{rowData.startDate}}</td>
+              <td>{{rowData.endDate }}</td>
+              <td>{{rowData.status }}</td>
+              <td>{{rowData.cost }}</td>
+              <td>{{rowData.budgetCost }}</td>
+              <td>{{rowData.actualCost }}</td>
+              <td>{{rowData.unitQuantity }}</td>
+              <td>{{rowData.unitCost }}</td>
+
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft"></ng-template>
+      <ng-template pTemplate="paginatorright">
+        <p>{{ totalData }}</p>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td>No Data</td>
+        </tr>
+      </ng-template>
+  </p-table>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="p-grid  p-align-center p-justify-center card" style="height: 84vh; overflow: hidden;">
+      <div class="actions">
+      <div class="actions__right">
+        <p-button
+          [disabled]="!selectedProduct7"
+          id="client-only-credit-use"
+          pTooltip="უარყოფა"
+          class="actions__right--btn-search"
+          icon="pi pi-ban"
+          tooltipPosition="bottom"
+        ></p-button>
+        <p-button
+        [disabled]="!selectedProduct7"
+            id="client-add-perm"
+            class="btn-search"
+            pTooltip="დაავტორება"
+            class="actions__right--btn-search"
+            icon="pi pi-plus"
+            tooltipPosition="bottom"
+        ></p-button>
+      </div>
+    </div>
+  <div class="p-col" style="width: 100%; overflow-y: auto; height: calc(100% - 70px);">
+
+      <p-table
+      [value]="products2"
+      [resizableColumns]="true"
+      dataKey="id"
+      editMode="row"
+      [paginator]="true"
+      [resizableColumns]="true"
+      [totalRecords]="products2.length"
+      [rows]="10"
+      [selectionMode]="sss"
+      [(selection)]="selectedProduct7"
+      (onRowSelect)="onRowSelect($event)"
+      >
+        <ng-template pTemplate="header">
+            <tr>
+                <th pResizableColumn style="width: 23%">Code</th>
+                <th pResizableColumn style="width: 23%">Name</th>
+                <th pResizableColumn style="width: 23%">Category</th>
+                <th pResizableColumn style="width: 23%">Quantity</th>
+                <th style="width:8rem" pResizableColumn></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="product" [pSelectableRow]="product">
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="product.code">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.code}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="product.name" required>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.name}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <p-dropdown [options]="statuses"  *ngIf="!showInput" [(ngModel)]="product.inventoryStatus" [style]="{'width':'90%'}" ></p-dropdown>
+                            <input *ngIf="showInput" [(ngModel)]="dropDownn" type="text"  [style]="{'width':'90%'}" pInputText/>
+                            <i
+                              *ngIf="showInput"
+                              class="pi pi-check"
+                              style="margin-left: 7px;"
+                              (click)="chngg(dropDownn)"
+                              pTooltip="შენახვა"
+                              tooltipPosition="bottom"
+                            ></i>
+                            <i *ngIf="!showInput" pTooltip="დამატება"  tooltipPosition="bottom" class="pi pi-pencil" style="margin-left: 7px;" (click)="changeEdit()"></i>
+
+                          </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.inventoryStatus}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="product.price">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{product.price | currency: 'USD'}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td style="text-align:center">
+                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(product)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(product, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft"></ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p >
+                {{ products2.length }}
+            </p>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td >
+                    ჩანაწერი არ მოიძებნა
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+  </div>
+</div>

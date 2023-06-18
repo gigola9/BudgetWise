@@ -1,0 +1,15 @@
+.actions {
+    height: 50px;
+    display: flex;
+  
+    &__right {
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+  
+      &--btn-search {
+        margin-right: 8px;
+      }
+    }
+  }
+   

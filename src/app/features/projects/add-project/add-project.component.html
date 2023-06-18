@@ -1,0 +1,66 @@
+<p-dialog
+  [(visible)]="addWeightsVisible"
+  header="Add New Project"
+  [resizable]="false"
+  [style]="{width: '700px'}"
+  (onHide)="hideModal()"
+  [closeOnEscape]="true"
+>
+  <form [formGroup]="addWeightForm" (ngSubmit)="addWeight()">
+    <div class="p-grid" style="margin-top: 2px;">
+      <div class="p-col-12 p-grid p-align-center">
+        <div class="p-col bold" style="width: 140px;">Name</div>
+        <div class="p-col">
+          <input type="text" style="width: 190px;" pInputText formControlName="name"/>
+        </div>
+        <div class="p-col bold">Type</div>
+        <div class="p-col">
+          <input id="add-weights-new" type="text" style="width: 190px;" pInputText formControlName="type"/>
+        </div>
+      </div>
+      <div class="p-col-12 p-grid p-align-center">
+        <div class="p-col bold">Team Members</div>
+        <div class="p-col">
+          <input type="type" style="width: 190px;" pInputText formControlName="teamMembers"/>
+        </div>
+        <div class="p-col bold">Budget</div>
+        <div class="p-col">
+          <input id="add-weights-new" min="0" type="number" style="width: 190px;" pInputText formControlName="budget"/>
+        </div>
+      </div>
+      <div class="p-col-12 p-grid p-align-center">
+        <div class="p-col bold">Start Date</div>
+        <div class="p-col">
+          <p-calendar
+             [showIcon]="true"
+            showButtonBar="true"
+            [style]="{'width':'190px'}"
+            appendTo="body"
+            dateFormat="dd/mm/yy"
+            formControlName="startDate"
+          ></p-calendar>
+        </div>
+        <div class="p-col bold">End Date</div>
+        <div class="p-col">
+          <p-calendar
+          [showIcon]="true"
+            showButtonBar="true"
+            [style]="{'width':'190px'}"
+            appendTo="body"
+            dateFormat="dd/mm/yy"
+            formControlName="endDate"
+        ></p-calendar>
+        </div>
+      </div>
+      <div class="p-col-12 p-grid p-align-center">
+        <div class="p-col bold">Description</div>
+        <div class="p-col">
+          <input type="text" style="width: 517px;" pInputText formControlName="description"/>
+        </div>
+      </div>
+      <div class="p-col-12 p-grid p-align-center" style="display: flex; justify-content: flex-end; padding-right: 14px;">
+        <p-button id="add-weights-submit" label="Submit" type="submit" [disabled]="addWeightForm.invalid"></p-button>
+      </div>
+    </div>
+  </form>
+</p-dialog>

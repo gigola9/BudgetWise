@@ -1,0 +1,21 @@
+:host ::ng-deep .p-dialog-header-close-icon {
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+:host ::ng-deep .p-dialog-header-close > span::before {
+  color: red !important;
+  font-weight: bold !important;
+  font-size: 18px !important;
+}
+
+:host ::ng-deep .status-stroke {
+  text-shadow: -0.7px -0.7px 0 #fff,  0.7px -0.7px 0 #fff, -0.7px 0.7px 0 #fff, 0.7px 0.7px 0 #fff;
+}
+
+:host ::ng-deep .p-dialog-footer {
+  display: flex;
+  flex-flow: row-reverse;
+}
+

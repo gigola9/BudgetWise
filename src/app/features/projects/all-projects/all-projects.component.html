@@ -1,0 +1,81 @@
+<div class="p-grid  p-align-center p-justify-center card" style="height: 84vh; overflow: hidden;">
+  <div class="actions p-col-12">
+    <app-project-actions
+      [selectedRate]="selectedRate"
+      (onShowDialog)="showAddWeightDialog()"
+      (onDelete)="delete()"
+      (onRefresh)="refreshTable()"
+      (onExport)="downloadExcel()"
+    ></app-project-actions>
+  </div>
+  <div class="p-col" style="width: 100%; overflow-y: auto; height: calc(100% - 70px); margin-top: 20px;">
+    <p-table
+    #dt
+    [value]="projects"
+    [resizableColumns]="true"
+    dataKey="id"
+    editMode="row"
+    [totalRecords]="projectsLength"
+    selectionMode="single"
+    [(selection)]="selectedRate"
+    >
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="min-width: 140px;">Name</th>
+              <th style="min-width: 140px;">Type</th>
+              <th style="min-width: 110px;">Start Date</th>
+              <th style="min-width: 110px;">End Date</th>
+              <th style="min-width: 130px;">Budget</th>
+              <th style="min-width: 130px;">Total Expenses</th>
+              <th style="min-width: 130px;">Remaining Budget</th>
+              <th style="min-width: 140px;">Status</th>
+              <th style="min-width: 140px;">Tasks Completed</th>
+              <th style="min-width: 140px;">Revenue Generated</th>
+              <th style="min-width: 140px;">Profit/Loss</th>
+              <th style="min-width: 140px;">Team Members</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-editing="editing" let-ri="rowIndex">
+          <tr [pEditableRow]="rowData" [pSelectableRow]="rowData">
+              <td>
+                <a [routerLink]="['/projects/project', rowData.id]" style="font-weight: bold;" class="status-stroke">
+                  {{rowData.name}}
+                </a>
+              </td>
+              <td>{{rowData.type}}</td>
+              <td>{{rowData.startDate | date}}</td>
+              <td>{{rowData.endDate | date}}</td>
+              <td>{{rowData.budget | currency:'USD'}}</td>
+              <td>{{rowData.totalExpenses | currency:'USD'}}</td>
+              <td>{{rowData.remainingBudget | currency:'USD'}}</td>
+              <td
+                class="status-stroke"
+                [ngStyle]="{'color': rowData.status == 'Ongoing' ? '#f0b800' : rowData.status == 'Completed' ? 'green' : rowData.status == 'On Hold' ? 'red' : 'red' }"
+                style="font-weight: bold;"
+              >{{rowData.status}}</td>
+              <td>{{rowData.tasksCompleted}}</td>
+              <td>{{rowData.revenueGenerated | currency:'USD'}}</td>
+              <td>{{rowData.profitLoss | currency:'USD'}}</td>
+              <td>{{rowData.teamMembers}}</td>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft"></ng-template>
+      <ng-template pTemplate="paginatorright">
+        <p>{{ totalData }}</p>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td>No Data</td>
+        </tr>
+      </ng-template>
+  </p-table>
+  </div>
+</div>
+
+<app-add-project
+  [addWeightsVisible]="addWeightsVisible"
+  (hideRateWeight)="onWeightHide($event)"
+  (onAddWeightSubmit)="onAddWeightSubmit($event)"
+></app-add-project>
+
+<p-confirmDialog acceptLabel="Yes" rejectLabel="No" [style]="{width: '350px'}"></p-confirmDialog>

@@ -1,0 +1,39 @@
+<div class="actions__right">
+    <button
+      pButton
+      id="weight-actions-add"
+      pTooltip="Add Project"
+      (click)="showAddDialog()"
+      class="actions__right--btn-search"
+      icon="pi pi-plus"
+      tooltipPosition="bottom"
+    ></button>
+    <button
+      pButton
+      id="weight-actions-delete"
+      pTooltip="Delete"
+      class="actions__right--btn-search p-button-danger"
+      icon="pi pi-trash"
+      tooltipPosition="bottom"
+      [disabled]="!selectedRate"
+      (click)="delete()"
+    ></button>
+    <button
+      pButton
+      id="weight-actions-excel"
+      pTooltip="Export"
+      class="actions__right--btn-search"
+      icon="pi pi-file-excel"
+      tooltipPosition="bottom"
+      (click)="excel()"
+    ></button>
+    <button
+      pButton
+      id="weight-actions-refresh"
+      pTooltip="Refresh"
+      class="actions__right--btn-search"
+      icon="pi pi-replay"
+      tooltipPosition="bottom"
+      (click)="refresh()"
+    ></button>
+  </div>
